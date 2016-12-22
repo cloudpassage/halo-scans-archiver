@@ -1,5 +1,9 @@
 # CloudPassage Halo Scans Archiver
 
+[![Build Status](https://travis-ci.org/cloudpassage/halo-scans-archiver.svg?branch=master)](https://travis-ci.org/cloudpassage/halo-scans-archiver)
+
+
+
 
 
 ## What it does
