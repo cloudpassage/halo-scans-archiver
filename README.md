@@ -30,7 +30,9 @@ stops, assuming that you want the scans archived locally.  If you want your
 scans stored in S3, define the AWS-oriented environment variables
 (AWS_S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY) and don't worry about
 mounting in a directory for the retrieved scans.  The S3 bucket must exist
-before running this tool.  It doesn't attempt to create one for you.
+before running this tool.  It doesn't attempt to create one for you.  Follow the
+principle of least privilege: Only use an API key for AWS that has access to the
+S3 bucket you need to drop the scans into.
 
 ### Define the following environment variables:
 
