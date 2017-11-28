@@ -2,7 +2,7 @@ FROM alpine:3.4
 MAINTAINER toolbox@cloudpassage.com
 
 ENV HALO_SCANS_GIT=https://github.com/cloudpassage/halo-scans
-ENV HALO_SCANS_VERSION=v0.11
+ENV HALO_SCANS_VERSION=v0.12
 
 ENV HALO_API_HOSTNAME=api.cloudpassage.com
 ENV HALO_API_PORT=443
@@ -28,7 +28,7 @@ WORKDIR /app/tool/
 
 RUN pip install \
     boto3==1.4.2 \
-    codeclimate-test-reporter==0.2.0 \
+    codeclimate-test-reporter==0.2.3 \
     coverage==4.2 \
     pytest==2.8.0 \
     pytest-cover==3.0.0 \
