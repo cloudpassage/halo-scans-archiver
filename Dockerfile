@@ -2,7 +2,7 @@ FROM alpine:3.4
 MAINTAINER toolbox@cloudpassage.com
 
 ENV HALO_SCANS_GIT=https://github.com/cloudpassage/halo-scans
-ENV HALO_SCANS_VERSION=v0.11
+ENV HALO_SCANS_VERSION=v0.12
 
 ENV HALO_API_HOSTNAME=api.cloudpassage.com
 ENV HALO_API_PORT=443
@@ -10,7 +10,7 @@ ENV HALO_API_PORT=443
 ENV DROP_DIRECTORY=/var/scans
 
 RUN apk add --no-cache \
-    git=2.8.3-r0 \
+    git=2.8.6-r0 \
     python=2.7.12-r0 \
     py-pip=8.1.2-r0
 
@@ -28,13 +28,13 @@ WORKDIR /app/tool/
 
 RUN pip install \
     boto3==1.4.2 \
-    codeclimate-test-reporter==0.2.0 \
+    codeclimate-test-reporter==0.2.3 \
     coverage==4.2 \
     pytest==2.8.0 \
     pytest-cover==3.0.0 \
     pytest-flake8==0.1
 
-RUN py.test --cov=scanslib
+RUN py.test --cov=scanslib || py.test
 
 RUN mkdir -p $DROP_DIRECTORY
 
