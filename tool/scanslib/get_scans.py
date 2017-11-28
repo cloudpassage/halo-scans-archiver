@@ -10,7 +10,7 @@ class GetScans(object):
         self.enricher = haloscans.HaloScanDetails(key, secret)
         self.target_date = target_date
         self.batch_size = batch_size
-        self.max_threads = 1
+        self.max_threads = 10
         print("Scan retrieval initialized for date %s") % self.target_date
 
     def __iter__(self):
