@@ -10,7 +10,7 @@ ENV HALO_API_PORT=443
 ENV DROP_DIRECTORY=/var/scans
 
 RUN apk add --no-cache \
-    git=2.8.3-r0 \
+    git=2.8.6-r0 \
     python=2.7.12-r0 \
     py-pip=8.1.2-r0
 
