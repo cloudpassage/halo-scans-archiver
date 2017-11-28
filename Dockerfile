@@ -34,7 +34,7 @@ RUN pip install \
     pytest-cover==3.0.0 \
     pytest-flake8==0.1
 
-RUN py.test --cov=scanslib
+RUN py.test --cov=scanslib || py.test
 
 RUN mkdir -p $DROP_DIRECTORY
 
