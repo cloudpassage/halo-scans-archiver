@@ -2,7 +2,7 @@ FROM alpine:3.4
 MAINTAINER toolbox@cloudpassage.com
 
 ENV HALO_SCANS_GIT=https://github.com/cloudpassage/halo-scans
-ENV HALO_SCANS_VERSION=v0.12
+ENV HALO_SCANS_VERSION=v0.13
 
 ENV HALO_API_HOSTNAME=api.cloudpassage.com
 ENV HALO_API_PORT=443
