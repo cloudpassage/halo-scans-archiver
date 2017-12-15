@@ -8,6 +8,7 @@ class GetScans(object):
         self.h_s = haloscans.HaloScans(key, secret,
                                        search_params=search_params)
         self.enricher = haloscans.HaloScanDetails(key, secret)
+        self.enricher.set_halo_session()
         self.target_date = target_date
         self.batch_size = batch_size
         self.max_threads = 10
@@ -27,9 +28,7 @@ class GetScans(object):
                 raise StopIteration
 
     def get_enriched_scans(self, scan_ids):
-        """Magic happens here... we map pages to threads in a pool, return
-        results when it's all done."""
-        self.enricher.halo_session = self.enricher.build_halo_session()
+        """Map pages to threads, return results when it's all done."""
         pool = ThreadPool(self.max_threads)
         results = pool.map(self.enricher.get, scan_ids)
         pool.close()
