@@ -1,27 +1,42 @@
-FROM alpine:3.4
-MAINTAINER toolbox@cloudpassage.com
+# Get the halo-events component
+FROM docker.io/halotools/python-sdk:ubuntu-16.04_sdk-1.0.6 as downloader
 
-ENV HALO_SCANS_GIT=https://github.com/cloudpassage/halo-scans
-ENV HALO_SCANS_VERSION=v0.14
+ARG HALO_SCANS_VERSION=v0.14
+
+RUN apt-get update && \
+    apt-get install -y \
+        git
+
+WORKDIR /app/
+
+RUN echo "Target branch for this build: $HALO_SCANS_VERSION"
+
+RUN git clone https://github.com/cloudpassage/halo-scans
+
+RUN cd halo-scans && \
+    git archive --verbose --format=tar.gz -o /app/haloscans.tar.gz $HALO_SCANS_VERSION
+
+##########################################################
+FROM docker.io/halotools/python-sdk:ubuntu-16.04_sdk-1.0.6
+MAINTAINER toolbox@cloudpassage.com
 
 ENV HALO_API_HOSTNAME=api.cloudpassage.com
 ENV HALO_API_PORT=443
 
 ENV DROP_DIRECTORY=/var/scans
 
-RUN apk add --no-cache \
-    git=2.8.6-r0 \
-    python=2.7.12-r0 \
-    py-pip=8.1.2-r0
 
 RUN mkdir /app
+COPY --from=downloader /app/haloscans.tar.gz /src/haloscans.tar.gz
 COPY ./ /app/
 
-RUN mkdir /src/
 WORKDIR /src/
-RUN git clone ${HALO_SCANS_GIT}
+
+RUN mkdir halo-scans && \
+    cd halo-scans && \
+    tar -zxvf ../haloscans.tar.gz
+
 WORKDIR /src/halo-scans
-RUN git checkout ${HALO_SCANS_VERSION}
 RUN pip install .
 
 WORKDIR /app/tool/
