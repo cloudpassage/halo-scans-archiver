@@ -13,8 +13,12 @@ start_time = datetime.now()
 s3_bucket_name = os.getenv("AWS_S3_BUCKET")
 file_number = 0
 counter = 0
+scan_threads = int(os.getenv("SCAN_THREADS", 10))
+enricher_threads = int(os.getenv("ENRICHER_THREADS", 5))
 scan_cache = scanslib.GetScans(config.key_id, config.secret_key,
-                               scans_per_file, env_date)
+                               config.api_hostname, config.api_port,
+                               scans_per_file, env_date, scan_threads,
+                               enricher_threads)
 
 if scanslib.Utility.target_date_is_valid(env_date) is False:
     msg = "Bad date! %s" % env_date

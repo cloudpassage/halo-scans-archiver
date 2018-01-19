@@ -38,6 +38,10 @@ S3 bucket you need to drop the scans into.
 
 * HALO_API_KEY: sometimes referred to as Key ID
 * HALO_API_SECRET_KEY
+* HALO_API_HOSTNAME: Defaults to `api.cloudpassage.com`  Don't change this
+unless you're absolutely sure you need to.
+* HALO_API_PORT: Defaults to `443`.  Like `HALO_API_HOSTNAME`, don't change this
+unless you're sure you need to.
 * TARGET_DATE: Formatted like this: "2016-12-01"
 * LOCAL_OUTPUT_DIR: absolute path to the directory you want your scans to land
 in

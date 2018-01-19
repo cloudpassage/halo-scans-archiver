@@ -3,15 +3,23 @@ from multiprocessing.dummy import Pool as ThreadPool
 
 
 class GetScans(object):
-    def __init__(self, key, secret, batch_size, target_date):
+    def __init__(self, key, secret, api_host, api_port, batch_size,
+                 target_date, scan_threads, enricher_threads):
         search_params = {"since": target_date, "sort_by": "created_at.asc"}
-        self.h_s = haloscans.HaloScans(key, secret,
+        self.h_s = haloscans.HaloScans(key, secret, api_host=api_host,
+                                       api_port=api_port,
+                                       max_threads=scan_threads,
                                        search_params=search_params)
-        self.enricher = haloscans.HaloScanDetails(key, secret)
+        # The following statement governs behavior of enricher, including
+        # the size of the thread pool that retrieves FIM findings.
+        self.enricher = haloscans.HaloScanDetails(key, secret,
+                                                  api_host=api_host,
+                                                  api_port=api_port,
+                                                  max_threads=enricher_threads)
         self.enricher.set_halo_session()
         self.target_date = target_date
         self.batch_size = batch_size
-        self.max_threads = 10
+        self.max_threads = scan_threads
         print("Scan retrieval initialized for date %s") % self.target_date
 
     def __iter__(self):
