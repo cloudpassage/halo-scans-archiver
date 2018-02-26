@@ -1,7 +1,7 @@
 # Get the halo-events component
-FROM docker.io/halotools/python-sdk:ubuntu-16.04_sdk-1.0.6 as downloader
+FROM docker.io/halotools/python-sdk:ubuntu-16.04_sdk-1.1.1 as downloader
 
-ARG HALO_SCANS_VERSION=v0.14
+ARG HALO_SCANS_VERSION=v0.15
 
 RUN apt-get update && \
     apt-get install -y \
@@ -17,7 +17,7 @@ RUN cd halo-scans && \
     git archive --verbose --format=tar.gz -o /app/haloscans.tar.gz $HALO_SCANS_VERSION
 
 ##########################################################
-FROM docker.io/halotools/python-sdk:ubuntu-16.04_sdk-1.0.6
+FROM docker.io/halotools/python-sdk:ubuntu-16.04_sdk-1.1.1
 MAINTAINER toolbox@cloudpassage.com
 
 ENV HALO_API_HOSTNAME=api.cloudpassage.com
@@ -25,6 +25,7 @@ ENV HALO_API_PORT=443
 
 ENV DROP_DIRECTORY=/var/scans
 
+RUN apt-get update && apt-get install -y expect
 
 RUN mkdir /app
 COPY --from=downloader /app/haloscans.tar.gz /src/haloscans.tar.gz
@@ -53,4 +54,4 @@ RUN py.test --cov=scanslib || py.test
 
 RUN mkdir -p $DROP_DIRECTORY
 
-CMD python /app/tool/runner.py
+CMD unbuffer python /app/tool/runner.py
