@@ -20,8 +20,10 @@ scan_cache = scanslib.GetScans(config.key_id, config.secret_key,
                                scans_per_file, env_date, scan_threads,
                                enricher_threads)
 
-if scanslib.Utility.target_date_is_valid(env_date) is False:
-    msg = "Bad date! %s" % env_date
+if (env_date is None or
+        scanslib.Utility.target_date_is_valid(env_date) is False):
+    msg = "Bad date: %s \nExiting!" % env_date
+    print(msg)
     sys.exit(2)
 
 for batch in scan_cache:
