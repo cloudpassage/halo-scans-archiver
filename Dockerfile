@@ -1,7 +1,7 @@
 # Get the halo-events component
 FROM docker.io/halotools/python-sdk:ubuntu-16.04_sdk-1.1.1 as downloader
 
-ARG HALO_SCANS_VERSION=v0.15
+ARG HALO_SCANS_VERSION=v0.16
 
 RUN apt-get update && \
     apt-get install -y \
