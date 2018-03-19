@@ -8,7 +8,7 @@ from datetime import datetime
 config = cloudpassage.ApiKeyManager()
 env_date = os.getenv("TARGET_DATE")
 output_dir = os.getenv("DROP_DIRECTORY")
-scans_per_file = 10000
+scans_per_file = 100
 start_time = datetime.now()
 s3_bucket_name = os.getenv("AWS_S3_BUCKET")
 file_number = 0

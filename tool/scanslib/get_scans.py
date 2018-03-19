@@ -1,4 +1,5 @@
 import haloscans
+import time
 
 
 class GetScans(object):
@@ -17,15 +18,14 @@ class GetScans(object):
     def __iter__(self):
         batch = []
         for scan in self.h_s:
-            print(scan)
             if scan["created_at"].startswith(self.target_date):
                 batch.append(scan)
-                print(scan["id"])
                 if len(batch) >= self.batch_size:
-                    print("Yielding batch")
                     yield list(batch)
                     batch = []
             else:
                 yield list(batch)
-                print("No more scans for target day!")
+                print("No more scans for target day!\nShutting down tool...")
+                self.h_s.shutdown = True
+                time.sleep(60)
                 raise StopIteration
