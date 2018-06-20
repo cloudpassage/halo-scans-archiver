@@ -6,7 +6,8 @@ import time
 from datetime import datetime
 
 config = cloudpassage.ApiKeyManager()
-env_date = os.getenv("TARGET_DATE")
+env_date = os.getenv("TARGET_DATE",
+                     scanslib.Utility.iso8601_arbitrary_days_ago(1))
 output_dir = os.getenv("DROP_DIRECTORY")
 scans_per_file = 100
 start_time = datetime.now()
