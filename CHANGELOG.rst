@@ -1,8 +1,18 @@
 Changelog
 =========
 
-v0.17
+v0.18
 -----
+
+Changes
+~~~~~~~
+
+- Target date defaults to yesterday. [Ash Wilson]
+
+  If no TARGET_DATE is specified, the prior day is set.
+
+v0.17 (2018-03-19)
+------------------
 
 Changes
 ~~~~~~~

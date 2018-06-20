@@ -42,7 +42,8 @@ S3 bucket you need to drop the scans into.
 unless you're absolutely sure you need to.
 * HALO_API_PORT: Defaults to `443`.  Like `HALO_API_HOSTNAME`, don't change this
 unless you're sure you need to.
-* TARGET_DATE: Formatted like this: "2016-12-01"
+* TARGET_DATE: Formatted like this: "2016-12-01" (optional, defaults to
+yesterday)
 * LOCAL_OUTPUT_DIR: absolute path to the directory you want your scans to land
 in
 * AWS_S3_BUCKET: If this is defined, the tool will attempt to upload the
