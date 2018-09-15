@@ -1,5 +1,5 @@
 # Get the halo-scans component
-FROM docker.io/halotools/python-sdk:ubuntu-16.04_sdk-1.1.4 as downloader
+FROM docker.io/halotools/python-sdk:ubuntu-16.04_sdk-1.1.5 as downloader
 
 ARG HALO_SCANS_VERSION=v0.17
 
@@ -17,7 +17,7 @@ RUN cd halo-scans && \
     git archive --verbose --format=tar.gz -o /app/haloscans.tar.gz $HALO_SCANS_VERSION
 
 ##########################################################
-FROM docker.io/halotools/python-sdk:ubuntu-16.04_sdk-1.1.4
+FROM docker.io/halotools/python-sdk:ubuntu-16.04_sdk-1.1.5
 MAINTAINER toolbox@cloudpassage.com
 
 ENV HALO_API_HOSTNAME=api.cloudpassage.com
